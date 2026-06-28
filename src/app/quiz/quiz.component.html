@@ -1,0 +1,46 @@
+<section class="quiz-shell">
+  <div class="quiz-card">
+    <div class="quiz-header">
+      <div>
+        <p class="eyebrow">{{ topic }} Quiz</p>
+        <h1>MCQ Challenge</h1>
+      </div>
+      <button type="button" class="ghost" (click)="goHome()">Back to dashboard</button>
+    </div>
+
+    <app-confirmation-modal
+      [isOpen]="showLeaveModal"
+      title="Leave quiz?"
+      message="You have unsaved quiz answers. Are you sure you want to leave this quiz?"
+      (confirmed)="confirmLeave()"
+      (cancelled)="cancelLeave()"
+    ></app-confirmation-modal>
+
+    @if (!submitted) {
+      <form (ngSubmit)="submitQuiz()">
+        @for (question of questions; track question.prompt; let i = $index) {
+          <fieldset>
+            <legend>{{ i + 1 }}. {{ question.prompt }}</legend>
+            @for (option of question.options; track option) {
+              <label class="option-row">
+                <input type="radio" [name]="'q' + i" [value]="option" [(ngModel)]="answers[i]" />
+                <span>{{ option }}</span>
+              </label>
+            }
+          </fieldset>
+        }
+        <button type="submit" class="submit-btn">Submit Quiz</button>
+      </form>
+    } @else {
+      <div class="results">
+        <h2>Results</h2>
+        <p>You scored <strong>{{ score }}</strong> out of <strong>{{ questions.length }}</strong>.</p>
+        <p class="muted">Great effort! You can try another topic from the dashboard.</p>
+        <div class="buttons">
+          <button type="button" (click)="restart()">Try Again</button>
+          <button type="button" class="ghost" (click)="goHome()">Go Home</button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

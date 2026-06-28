@@ -1,0 +1,61 @@
+<section class="dashboard-shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Student Panel</p>
+      <h1>Welcome, {{ userName }}</h1>
+    </div>
+    <button type="button" class="ghost" (click)="requestLogout()">Logout</button>
+  </header>
+
+  <div class="stats-grid">
+    <article class="card highlight">
+      <p class="label">Last score</p>
+      <h2>{{ lastScore }}</h2>
+      <p class="muted">Your recent result is stored instantly.</p>
+    </article>
+    <article class="card">
+      <p class="label">Attempted exams</p>
+      <h2>{{ attempts }}</h2>
+      <p class="muted">You have started this many exams.</p>
+    </article>
+    <article class="card">
+      <p class="label">Best score</p>
+      <h2>{{ bestScore }}</h2>
+      <p class="muted">Your strongest result so far.</p>
+    </article>
+    <article class="card">
+      <p class="label">Active topic</p>
+      <h2>{{ topic }}</h2>
+      <p class="muted">Choose a topic to begin a fresh quiz.</p>
+    </article>
+  </div>
+
+  <app-confirmation-modal
+    [isOpen]="showLogoutModal"
+    title="Log out?"
+    message="Are you sure you want to leave this session?"
+    (confirmed)="confirmLogout()"
+    (cancelled)="cancelLogout()"
+  ></app-confirmation-modal>
+
+  <div class="quiz-grid">
+    <article class="card quiz-card">
+      <h3>Start a quiz</h3>
+      <p>Pick one of the ready-made MCQ sets to test yourself.</p>
+      <div class="buttons">
+        <button type="button" (click)="startQuiz('Angular')">Angular</button>
+        <button type="button" (click)="startQuiz('JavaScript')">JavaScript</button>
+        <button type="button" (click)="startQuiz('General Knowledge')">General</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <h3>Why QuizHub?</h3>
+      <ul>
+        <li>Fast and simple MCQ experience</li>
+        <li>Instant results and score tracking</li>
+        <li>Clean dashboard for daily practice</li>
+      </ul>
+    </article>
+  </div>
+</section>

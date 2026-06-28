@@ -1,0 +1,23 @@
+<section class="auth-shell">
+  <div class="auth-card">
+    <p class="eyebrow">Welcome back</p>
+    <h1>Login to QuizHub</h1>
+    <p class="subtext">Access your dashboard and start a fresh MCQ challenge.</p>
+
+    <form (ngSubmit)="login()">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" [(ngModel)]="email" placeholder="student@example.com" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" [(ngModel)]="password" placeholder="Enter password" />
+
+      @if (errorMessage) {
+        <p class="error">{{ errorMessage }}</p>
+      }
+
+      <button type="submit">Sign In</button>
+    </form>
+
+    <a routerLink="/dashboard" class="link">Skip to dashboard</a>
+  </div>
+</section>
